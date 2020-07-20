@@ -1,0 +1,44 @@
+﻿@model BooksDetailsViewsModels
+<div class="row justify-content-center">
+    <!-- Card -->
+    <div class="card">
+
+        <!-- Card image -->
+        <div class="view overlay">
+            <img class="card-img-top" src="https://mdbootstrap.com/img/Mockups/Lightbox/Thumbnail/img%20(67).jpg"
+                 alt="Card image cap">
+            <a href="#!">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!-- Card content -->
+        <div class="card-body">
+            <div class="card-header text-center">
+                <h2>@Model.Id</h2>
+            </div>
+            <!-- Title -->
+            <h4 class="card-title">Tên Sách:@Model.TenSach</h4>
+            <h4 class="card-title ">Tên Tác Gỉa:@Model.TenTacGia</h4>
+            <h4 class="card-text">Mô Tả :@Model.Mota</h4>
+            <h4 class="card-text">Năm Xuất Bản :@Model.Nsx</h4>
+            <h4 class="card-text">Số Lượng :@Model.SoLuong</h4>
+            <h4 class="card-text">Thể Loại :@Model.TheLoaiName</h4>
+            <!-- Text -->
+            <hr />
+
+            <div class="card-body text-center">
+
+                <div>
+                    <a asp-controller="Home" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-danger mx-2">Update</a>
+                    <a asp-controller="Home" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-info ">Delete</a>
+                    <a class="btn btn-danger" asp-controller="Home" asp-action="Index">Back</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Card -->

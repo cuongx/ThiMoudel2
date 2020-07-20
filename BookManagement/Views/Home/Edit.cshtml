@@ -1,0 +1,80 @@
+﻿@model EditBooksViewsModel
+  @{
+        ViewBag.Title = "Home Edit";
+        var theloai = ViewBag.TheLoais as List<TheLoai>;
+
+    }
+    <form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="TenSach"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="TenSach" placeholder="TenSach">
+                <span class="text-danger" asp-validation-for="TenSach"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="TenTacGia"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="TenTacGia" placeholder="TenTacGia">
+                <span class="text-danger" asp-validation-for="TenTacGia"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label " asp-for="Mota"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Mota" placeholder="Mota">
+                <span class="text-danger" asp-validation-for="Mota"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label" asp-for="TheLoaiId">Thể Loại</label>
+            <div class="col-sm-10">
+                <select class="form-control" asp-for="TheLoaiId" placeholder="Thể Loại">
+                    <option value="">Select The Loai</option>
+                    @if (theloai != null)
+                    {
+                        @foreach (var pb in theloai)
+                        {
+                            <option value="@pb.TheLoaiId" selected="@(pb.TheLoaiId == @Model.TheLoaiId)">@pb.TheLoaiName</option>
+                        }
+                    }
+
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label " asp-for="SoLuong"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="SoLuong" placeholder="Nsx">
+                <span class="text-danger" asp-validation-for="SoLuong"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label " asp-for="Nsx"></label>
+            <div class="col-sm-10">
+                <input class="form-control" asp-for="Nsx" placeholder="Mota">
+                <span class="text-danger" asp-validation-for="Nsx"></span>
+            </div>
+        </div>
+
+        <div asp-validation-summary="All"></div>
+        <div class="form-group row">
+            <div class="col-sm-12">
+                <button type="submit" class="btn btn-danger mx-2">Edit </button>
+                <a class="btn btn-primary mx-2" asp-controller="Home" asp-action="Index">Back</a>
+            </div>
+        </div>
+    </form>
+
+    @section Scripts{
+
+        <script>
+                    $(Document).ready(function (){
+                    $(".custom-file-input").on("change", function () {
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                          $("#avatar").attr("src", window.URL.createObjectURL($(this)[0].files[0]));
+                    });
+                    });
+        </script>
+    }

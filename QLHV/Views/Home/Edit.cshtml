@@ -1,0 +1,72 @@
+﻿@model EditStudentsViewsModel
+@{
+    ViewBag.Title = "Home Edit";
+    var lophoc = ViewBag.LopHoc as List<LopHoc>;
+
+}
+<form enctype="multipart/form-data" asp-controller="Home" asp-action="Edit" method="post">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-white" asp-for="HoTen"></label>
+        <div class="col-sm-10">
+            <input class="form-control" asp-for="HoTen" placeholder="HoTen">
+            <span class="text-danger" asp-validation-for="HoTen"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-white" asp-for="NgaySinh"></label>
+        <div class="col-sm-10">
+            <input class="form-control" asp-for="NgaySinh" placeholder="NgaySinh">
+            <span class="text-danger" asp-validation-for="NgaySinh"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label text-white" asp-for="Email"></label>
+        <div class="col-sm-10">
+            <input class="form-control" asp-for="Email" placeholder="Email">
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" asp-for="LopHocId"></label>
+        <div class="col-sm-10">
+            <select class="form-control" asp-for="LopHocId" placeholder="Lớp">
+                <option value="">Select Lop Hoc</option>
+                @if (lophoc != null)
+                {
+                    @foreach (var item in lophoc)
+                    {
+                        <option value="@item.LopHocId" selected="@(item.LopHocId== @Model.LopHocId)">@item.LopHocName</option>
+                    }
+                }
+
+            </select>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label" asp-for="GioiTinh"></label>
+        <div class="col-sm-10">
+            <select class="form-control" asp-for="GioiTinh" asp-items="@Html.GetEnumSelectList<Dept>()" placeholder="GioiTinh"></select>
+        </div>
+    </div>
+   
+    <div asp-validation-summary="All"></div>
+    <div class="form-group row">
+        <div class="col-sm-12">
+            <button type="submit" class="btn btn-danger mx-2">Edit </button>
+            <a class="btn btn-primary mx-2" asp-controller="Home" asp-action="Index">Back</a>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+
+    <script>
+                $(Document).ready(function (){
+                $(".custom-file-input").on("change", function () {
+                    var fileName = $(this).val().split("\\").pop();
+                    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+                      $("#avatar").attr("src", window.URL.createObjectURL($(this)[0].files[0]));
+                });
+                });
+    </script>
+}

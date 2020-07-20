@@ -1,0 +1,103 @@
+﻿@model List<DetailsViewsModels>;
+@{
+    ViewBag.Title = "Home Table";
+ 
+
+
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <form class="form-inline">
+                <div class="md-form my-0 ">
+                    <input id="myInput" class="form-control" type="text" placeholder="Search..." aria-label="Search">
+                </div>
+                <div class="mx-3">
+
+                    <a asp-controller="Home" asp-action="Create" class="btn btn-success mx-2">Create</a>
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-success">Back</a>
+                </div>
+            </form>
+        </div>
+
+        <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Home</h3>
+
+        <div class="card-body">
+            <div class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                    <a asp-controller="Home" asp-action="Create" class="text-success">
+                        <i class="fas fa-plus fa-2x" aria-hidden="true"></i>
+                    </a>
+                </span>
+                <table id="table" class="table table-bordered table-responsive-md table-striped text-center">
+                    <thead>
+                        <tr>
+                            <th>MS</th>
+                            <th>Tên Sách</th>
+                            <th>Tên Tác Giả</th>
+                            <th>Mô Tả</th>
+                            <th>Năm Xuất Bản</th>
+                            <th>Số Lượng Sách</th>
+                            <th>Thể Loại</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            @foreach (var pb in Model)
+                            {
+
+                                <tr>
+                                    <td>@pb.Id</td>
+                                    <td>@pb.TenSach</td>
+                                    <td>@pb.TenTacGia</td>
+                                    <td>@pb.Mota</td>
+                                    <td>@pb.Nsx</td>
+                                    <td>@pb.SoLuong</td>
+                                    <td>@pb.Name</td>
+                                    <td>
+                                        <span class="table-remove">
+                                            <a asp-controller="Home" asp-action="Edit" asp-route-id="@pb.Id" class="btn btn-success">Edit</a>
+                                            <a asp-controller="Home" asp-action="Delete" class="btn btn-danger" asp-route-id="@pb.Id">Delete</a>
+                                            <a asp-controller="Home" asp-action="Details" class="btn btn-danger" asp-route-id="@pb.Id">View</a>
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+</script>
+
+
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $("#myInput").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#table td").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
